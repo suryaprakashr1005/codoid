@@ -1,0 +1,119 @@
+1 What are Scalar functions and write a query?
+LCASE()
+UCASE()
+LEN()
+MID()
+ROUND()
+NOW()
+FORMAT()
+example 
+1.  SELECT LCASE(StudentName)
+    FROM Students;
+2.  SELECT UCASE(StudentName)
+    FROM Students;
+3.  SELECT LENGTH(“surya”) AS StudentNameLen;
+    FROM Students;
+4.  SELECT MID(StudentName, 2, 3)
+    FROM Students;
+5.  SELECT ROUND(Marks)
+    FROM Students;
+6.  SELECT NOW();
+    FROM Students;
+
+2.Explain joins with example and output.
+   Retrieving data from two or more than two tables based on common field.
+ Types:
+INNER JOIN
+FULL JOIN
+LEFT JOIN
+RIGHT JOIN
+1.SELECT Employee.EmpID,Employee.EmpFname,Employee.EmpLname,Projects.ProjectID,Projects.ProjectName
+FROM Employe table
+INNER JOIN Projects ON Employee.EmpID=Projects.EmpID;
+2.SELECT Employee.EmpFname,Employee.EmpLname,Projects.ProjectID
+FROM Employe table
+FULL JOIN Projects ON Employee.EmpID=Projects.EmpID;
+3.SELECT Employee.EmpFname,Employee.EmpLname,Projects.ProjectID,Projects.ProjectName
+FROM Employe table
+LEFT JOIN ON Employee.EmpID = Projects.EmpID ;
+4.SELECT Employee.EmpFname,Employee.EmpLname,Projects.ProjectID,Projects.ProjectName
+FROM Employe table
+RIGHT JOIN ON Employee.EmpID = Projects.EmpID;
+
+3. Write a SQL query to Rename the column name.
+ ALTER TABLE Employe;
+RENAME COLUMN EMP TO EMP ID;
+
+4. Write a SQL query to find duplicate records
+ SELECT EMP NAME,GENDER  
+FROM Employe table
+GROUP BY EMP NAME, GENDER
+HAVING (COUNT(EMP NAME) > 1) AND (COUNT(GENDER) > 1);
+
+5.How do we use the DISTINCT statement? What are its use?
+Inside a table and column often contains many duplicate values,and sometimes you only want to list the different (distinct) values.
+SYNTAX 
+SELECT DISTINCT column1, column2, ...
+FROM table_name;
+
+6. Remove duplicate from the table 
+SELECT EMP_NAME,SECTION,CONTACT_INFO,LOCATION, COUNT(*) 
+FROM EMP table
+GROUP BY EMP_NAME,SECTION,CONTACT_INFO,LOCATION
+HAVING COUNT(*)>1;
+
+7.Print max salary for a particular department 
+SELECT DEPT_ID,MAX(SALARY) 
+FROM emp table
+GROUP BY DEPT_ID;
+
+8.Use different operators in SQL 
+EQUAL
+SELECT * FROM Students
+WHERE Age = 20;
+GREATER THAN
+SELECT * 
+FROM students
+WHERE Age > 23;
+LESS THAN
+SELECT * FROM students
+WHERE Age <25;
+ANY 
+SELECT * FROM Students
+WHERE Age > ANY (SELECT Age FROM Students WHERE Age > 21);
+AND
+SELECT * FROM Students
+WHERE Age BETWEEN 22 AND 25;
+IN
+SELECT * FROM Students
+WHERE Age IN('23', '20');
+
+9."What is Query to display first 5 Records from
+Employee table?"
+SELECT TOP 5* 
+FROM emp table;
+
+10."What is Query to display last 5 Records from
+Employee table?"
+SELECT * 
+FROM emp table 
+WHERE rownum <= Rows_to_return 
+ORDER BY rownum DESC;
+
+11. "How to fetch 3rd highest salary using Rank
+Function"
+select * from (Select Dense_Rank() over ( order by  salary desc) as Rnk,E.* 
+from Employee table
+where sal=3;
+
+12. "How Can i create table with same structure with data
+of Employee table?"
+CREATE TABLE EMPTABLE AS SELECT * 
+FROM EMPLOYEE 
+WHERE 1=2;
+
+13. "Find Query to get information of Employee where
+Employee is not assigned to the department"
+Select * 
+from Employee 
+where Dept_no Not in(Select Department_no from Department);
